@@ -9,22 +9,62 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
     body {
-      background-color: #eef4f9;  /* soft background outside the document */
-      color: #1e2b37;
-      line-height: 1.5;
+      background-color: #0e0e10;
+      color: #f0f0f0;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* --- LANDING / HERO SECTION (full width, pops at top) --- */
+    /* header (simplified, no sticky for hero to breathe) */
+    .app-header {
+      background: linear-gradient(145deg, #121214 0%, #1c1c1f 100%);
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid #2c2c30;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffb347, #ff7e5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo .sub {
+      font-size: 0.9rem;
+      background: #2a2a2e;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      color: #aaa;
+      margin-left: 0.75rem;
+      font-weight: 400;
+      -webkit-text-fill-color: #aaa;
+    }
+
+    /* ----- LANDING / HERO SECTION (full width) ----- */
     .hero {
-      background: linear-gradient(145deg, #f5fafd, #ffffff);
-      border-bottom: 4px solid #2c7da0;
-      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #0b0b0e 0%, #1e1e24 100%);
+      padding: 5rem 1.5rem;
       text-align: center;
-      box-shadow: 0 6px 12px rgba(0,40,60,0.08);
+      border-bottom: 2px solid #ff8a5c;
+      box-shadow: inset 0 -10px 30px rgba(0,0,0,0.5);
     }
 
     .hero-content {
@@ -32,29 +72,31 @@
       margin: 0 auto;
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      color: #0a3144;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+    .hero h2 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #ffd8b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      border-bottom: none;
+      display: block;
+      padding-bottom: 0;
     }
 
     .hero .hero-sub {
-      font-size: 2rem;
-      color: #2c7da0;
+      font-size: 1.8rem;
+      color: #ffb347;
+      margin-bottom: 1.5rem;
       font-weight: 400;
-      margin-bottom: 1rem;
-      border-left: 6px solid #2c7da0;
-      display: inline-block;
-      padding-left: 1.5rem;
     }
 
     .hero p {
       font-size: 1.4rem;
-      color: #1e4a6f;
+      color: #c0c0cc;
       max-width: 700px;
-      margin: 1.5rem auto;
+      margin: 0 auto 2.5rem;
     }
 
     .hero-cta {
@@ -62,14 +104,13 @@
       gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 2rem;
     }
 
     .btn {
       background: transparent;
-      border: 2px solid #2c7da0;
-      color: #1e4a6f;
-      padding: 0.9rem 2.8rem;
+      border: 2px solid #ff8a5c;
+      color: #ffb347;
+      padding: 0.9rem 2.5rem;
       border-radius: 60px;
       font-size: 1.3rem;
       font-weight: 600;
@@ -77,410 +118,373 @@
       transition: all 0.2s ease;
       text-decoration: none;
       display: inline-block;
-      background-color: rgba(44,125,160,0.02);
     }
 
     .btn:hover {
-      background: #2c7da0;
-      color: white;
-      border-color: #1e4a6f;
-      box-shadow: 0 8px 18px rgba(44,125,160,0.3);
+      background: #ff8a5c;
+      color: #0e0e10;
+      border-color: #ff8a5c;
+      box-shadow: 0 0 20px #ff8a5c;
     }
 
-    /* --- main document container (exact replica from photo) --- */
-    .document {
-      max-width: 1000px;
-      margin: 3rem auto;
-      padding: 2rem 2.5rem;
-      background: white;
-      box-shadow: 0 20px 40px rgba(0,20,40,0.12);
-      border-radius: 12px;
+    .btn-outline {
+      border-color: #aaa;
+      color: #ddd;
     }
 
-    /* header exactly as in picture */
-    .doc-header {
-      margin-bottom: 2.5rem;
-      border-bottom: 2px solid #1e4a6f;
-      padding-bottom: 1rem;
-    }
-    .doc-header h1 {
-      font-size: 2.8rem;
-      font-weight: 600;
-      color: #0a3144;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem;
-    }
-    .doc-header .byline {
-      font-size: 1.2rem;
-      color: #2c7da0;
-      font-style: italic;
-      font-weight: 400;
-      border-left: 4px solid #2c7da0;
-      padding-left: 1rem;
+    .btn-outline:hover {
+      background: #aaa;
+      color: #0e0e10;
+      border-color: #aaa;
+      box-shadow: 0 0 15px #aaa;
     }
 
-    /* section styling */
+    /* main container for detail sections */
+    .container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* section styling (each frame) */
     section {
-      margin: 3rem 0;
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: sectionFadeIn 0.6s ease forwards;
     }
+    @keyframes sectionFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 600;
-      color: #1e4a6f;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #a8d5e5;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px solid #ff8a5c;
       display: inline-block;
+      color: #fff;
     }
 
-    /* why invest cards */
-    .reasons-grid {
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
-      margin-top: 1rem;
-    }
-    .reason-card {
-      background: #f0f7fa;
-      border-radius: 16px;
-      padding: 1.8rem 1.5rem;
-      border-left: 6px solid #2c7da0;
-      box-shadow: 0 4px 8px rgba(0,40,60,0.06);
-    }
-    .reason-card h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #0a3144;
-      margin-bottom: 0.75rem;
-    }
-    .reason-card p {
-      color: #2d4b62;
-      font-size: 1rem;
-      line-height: 1.5;
+      margin-top: 1.5rem;
     }
 
-    /* property overview stats */
-    .stats-wrapper {
-      background: #f0f7fa;
+    .info-card {
+      background: #1d1d20;
       border-radius: 24px;
-      padding: 2rem;
-      border: 1px solid #cbdbe6;
+      padding: 1.8rem 1.5rem;
+      border: 1px solid #2e2e35;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.7);
+      transition: transform 0.25s ease, border-color 0.2s;
     }
+    .info-card:hover {
+      transform: translateY(-6px);
+      border-color: #ff9f4b;
+    }
+    .info-card h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #ffb347;
+      margin-bottom: 1rem;
+    }
+    .info-card p {
+      color: #d0d0da;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      text-align: center;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.5rem;
     }
     .stat-item {
-      background: white;
-      border-radius: 16px;
-      padding: 1.8rem 0.5rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-      border: 1px solid #d0e1ec;
+      background: #1a1a20;
+      border-radius: 20px;
+      padding: 1.8rem 1rem;
+      text-align: center;
+      border: 1px solid #33333b;
+      transition: all 0.2s;
+    }
+    .stat-item:hover {
+      border-color: #ff8a5c;
+      background: #202028;
     }
     .stat-value {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 700;
-      color: #1e4a6f;
+      color: #ffb347;
       line-height: 1.2;
     }
     .stat-label {
       font-size: 1.2rem;
-      font-weight: 500;
-      color: #2c7da0;
-      margin: 0.5rem 0 0.25rem;
+      color: #aaa;
+      margin-top: 0.5rem;
     }
     .stat-desc {
-      font-size: 0.9rem;
-      color: #4f6f8a;
-    }
-    .property-note {
-      margin-top: 1.5rem;
-      font-size: 1rem;
-      color: #1e4a6f;
-      font-weight: 500;
-      text-align: center;
-      background: #d9eaf3;
-      padding: 0.6rem;
-      border-radius: 40px;
+      font-size: 0.95rem;
+      color: #7a7a85;
+      margin-top: 0.25rem;
     }
 
-    /* developmental pathways – numbered steps exactly as picture */
-    .pathways {
-      background: #f0f7fa;
-      border-radius: 28px;
-      padding: 2rem;
-    }
-    .steps-list {
-      list-style: none;
-      counter-reset: step-counter;
+    /* developmental pathway steps */
+    .steps-container {
       display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
     }
-    .step-item {
+    .step {
+      flex: 1 1 200px;
+      background: #1d1d20;
+      border-radius: 30px;
+      padding: 2rem 1.5rem;
+      border: 1px solid #2e2e35;
       counter-increment: step-counter;
-      background: white;
-      border-radius: 60px;
-      padding: 1rem 1.8rem 1rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      border: 1px solid #c1ddec;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      position: relative;
+      transition: all 0.2s;
     }
-    .step-item::before {
+    .steps-container {
+      counter-reset: step-counter;
+    }
+    .step:hover {
+      border-color: #ff9f4b;
+      transform: scale(1.02);
+    }
+    .step::before {
       content: counter(step-counter);
-      background: #2c7da0;
-      color: white;
-      font-weight: 700;
-      width: 2.8rem;
-      height: 2.8rem;
+      background: #ff8a5c;
+      color: black;
+      font-weight: bold;
+      width: 2.5rem;
+      height: 2.5rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      box-shadow: 0 4px 8px rgba(44,125,160,0.2);
-    }
-    .step-content {
-      flex: 1;
-    }
-    .step-content h4 {
       font-size: 1.3rem;
-      font-weight: 600;
-      color: #0a3144;
-      margin-bottom: 0.25rem;
+      margin-bottom: 1rem;
+      border: 2px solid #ffb347;
     }
-    .step-content p {
-      color: #3c5a73;
+    .step h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    .step p {
+      color: #b0b0bb;
       font-size: 1rem;
     }
 
-    /* map placeholder – exactly as picture description */
-    .map-box {
-      background: #e7f0f6;
-      border: 2px dashed #2c7da0;
-      border-radius: 36px;
+    /* map placeholder */
+    .map-placeholder {
+      background: #1a1a20;
+      border-radius: 40px;
       padding: 3rem 2rem;
       text-align: center;
+      border: 2px dashed #ff8a5c;
       margin: 2rem 0;
+      transition: background 0.3s;
+    }
+    .map-placeholder:hover {
+      background: #23232a;
     }
     .map-icon {
       font-size: 4rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
-    .map-box p {
-      font-size: 1.6rem;
+    .map-placeholder p {
+      font-size: 1.4rem;
+      color: #ffb347;
       font-weight: 500;
-      color: #1e4a6f;
-    }
-    .map-box small {
-      color: #2c7da0;
-      font-size: 1.1rem;
-    }
-    .map-features {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #2d4b62;
     }
 
     /* contact cards */
-    .contact-row {
+    .contact-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      justify-content: space-between;
-      background: #f0f7fa;
-      border-radius: 48px;
-      padding: 2rem 2.5rem;
+      justify-content: center;
+      margin-top: 2rem;
     }
     .contact-item {
+      background: #1d1d20;
+      border-radius: 40px;
+      padding: 1.5rem 2.5rem;
       display: flex;
       align-items: center;
-      gap: 1.2rem;
-      background: white;
-      padding: 1rem 2rem;
-      border-radius: 60px;
-      border: 1px solid #bdd8e8;
-      flex: 1 1 200px;
+      gap: 1.5rem;
+      border: 1px solid #2e2e35;
+      transition: 0.2s;
+      flex: 1 1 250px;
+    }
+    .contact-item:hover {
+      border-color: #ff8a5c;
+      background: #25252c;
     }
     .contact-icon {
       font-size: 2.2rem;
     }
     .contact-info h4 {
-      font-size: 1rem;
-      color: #1e4a6f;
-      font-weight: 400;
-      margin-bottom: 0.2rem;
+      font-size: 1.1rem;
+      color: #aaa;
     }
     .contact-info a {
-      color: #0a3144;
+      color: #ffb347;
       text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1.3rem;
+      font-weight: 500;
     }
     .contact-info a:hover {
       text-decoration: underline;
-      color: #2c7da0;
     }
 
-    /* footer */
-    .footer-note {
-      margin-top: 3rem;
+    .app-footer {
       text-align: center;
-      color: #6f8fa8;
-      border-top: 1px solid #cde0ec;
-      padding-top: 2rem;
+      padding: 2rem;
+      background: #0b0b0d;
+      color: #5f5f6b;
+      border-top: 1px solid #26262b;
       font-size: 0.95rem;
     }
 
-    /* responsiveness */
-    @media (max-width: 800px) {
-      .hero h1 { font-size: 3rem; }
-      .hero .hero-sub { font-size: 1.5rem; }
-      .document { padding: 1.5rem; }
-      .reasons-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .step-item { flex-direction: column; text-align: center; padding: 1.5rem; }
-      .step-item::before { margin-bottom: 0.5rem; }
-      .contact-row { flex-direction: column; align-items: stretch; }
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 2.8rem; }
+      .hero .hero-sub { font-size: 1.4rem; }
+      .hero p { font-size: 1.2rem; }
+      .btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; }
+      .contact-item { flex-direction: column; text-align: center; }
     }
-    @media (max-width: 500px) {
-      .stats-grid { grid-template-columns: 1fr; }
-    }
+
+    /* section fade delays */
+    section:nth-of-type(1) { animation-delay: 0.2s; }
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.4s; }
+    section:nth-of-type(4) { animation-delay: 0.5s; }
+    section:nth-of-type(5) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>WERNER ROAD <span class="sub">industrial park</span></h1>
+      </div>
+      <div style="color:#aaa;">📞 (123) 456-7890</div>
+    </div>
+  </header>
 
-  <!-- LANDING SECTION – pops at the top (full width) -->
+  <!-- LANDING / HERO SECTION (at the very top) -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Werner Road Industrial Park</h1>
-      <div class="hero-sub">Where industry meets opportunity</div>
+      <h2>Where industry meets opportunity</h2>
+      <div class="hero-sub">Werner Road Industrial Park</div>
       <p>100 acres of premium mixed‑use land. Strategic location, scalable infrastructure, and ready for your investment.</p>
       <div class="hero-cta">
-        <a href="#" class="btn">📊 Explore property</a>
-        <a href="#" class="btn">📞 Contact us</a>
+        <a href="#" class="btn">📊 View overview</a>
+        <a href="#" class="btn btn-outline">📞 Contact sales</a>
       </div>
     </div>
   </section>
 
-  <!-- MAIN DOCUMENT – exact replica from the photo -->
-  <div class="document">
-    <!-- exactly as in picture: heading and byline -->
-    <div class="doc-header">
-      <h1>Werner Road Industrial Park</h1>
-      <div class="byline">By: WERNER ROAD INDUSTRIAL PARK</div>
-    </div>
-
-    <!-- WHY INVEST? (three reasons) -->
+  <main class="container">
+    <!-- WHY INVEST? frame -->
     <section>
-      <h2>WHY INVEST?</h2>
-      <div class="reasons-grid">
-        <div class="reason-card">
+      <h2>⭐ WHY INVEST?</h2>
+      <div class="card-grid">
+        <div class="info-card">
           <h3>High‑Quality Land</h3>
-          <p>Our industrial park is located in a prime area with excellent infrastructure and access to major highways.</p>
+          <p>Premium terrain with excellent infrastructure and direct highway access.</p>
         </div>
-        <div class="reason-card">
+        <div class="info-card">
           <h3>Strategic Location</h3>
-          <p>Positioned near key economic zones, it offers easy connectivity to local markets.</p>
+          <p>Near key economic zones, easy connectivity to local markets and transport.</p>
         </div>
-        <div class="reason-card">
+        <div class="info-card">
           <h3>Scalable Development</h3>
-          <p>Designed for future expansion, ensuring long-term viability.</p>
+          <p>Flexible lots designed for future expansion and long‑term growth.</p>
         </div>
       </div>
     </section>
 
-    <!-- PROPERTY OVERVIEW (exact stats from picture) -->
+    <!-- PROPERTY OVERVIEW frame -->
     <section>
-      <h2>PROPERTY OVERVIEW</h2>
-      <div class="stats-wrapper">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-value">100 acres</div>
-            <div class="stat-label">Total Land Area</div>
-            <div class="stat-desc">mixed‑use development</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">80%</div>
-            <div class="stat-label">Commercial occupancy</div>
-            <div class="stat-desc">offices, retail, parking</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">20%</div>
-            <div class="stat-label">Residential occupancy</div>
-            <div class="stat-desc">apts, townhouses, amenities</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value">10%</div>
-            <div class="stat-label">Industrial occupancy</div>
-            <div class="stat-desc">manufacturing, warehousing, R&D</div>
-          </div>
+      <h2>📊 PROPERTY OVERVIEW</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">100 acres</div>
+          <div class="stat-label">Total Land Area</div>
+          <div class="stat-desc">mixed‑use: residential, commercial, industrial</div>
         </div>
-        <div class="property-note">
-          <span>📋 Land use: commercial · residential · industrial</span>
+        <div class="stat-item">
+          <div class="stat-value">80%</div>
+          <div class="stat-label">Commercial occupancy</div>
+          <div class="stat-desc">offices, retail, parking</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">20%</div>
+          <div class="stat-label">Residential occupancy</div>
+          <div class="stat-desc">apartments, townhouses, amenities</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">10%</div>
+          <div class="stat-label">Industrial occupancy</div>
+          <div class="stat-desc">manufacturing, warehousing, R&D</div>
         </div>
       </div>
     </section>
 
-    <!-- DEVELOPMENTAL PATHWAYS (numbered steps) -->
+    <!-- DEVELOPMENTAL PATHWAYS frame -->
     <section>
-      <h2>DEVELOPMENTAL PATHWAYS</h2>
-      <div class="pathways">
-        <div class="steps-list">
-          <div class="step-item">
-            <div class="step-content">
-              <h4>Site Preparation</h4>
-              <p>Soil testing, foundation work, utility connections (water, electricity, sewage).</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-content">
-              <h4>Building Construction</h4>
-              <p>Structural framing, roofing, interior finishing (walls, floors, ceilings).</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-content">
-              <h4>Infrastructure Development</h4>
-              <p>Roads and utilities, water supply, electricity to the site.</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-content">
-              <h4>Comprehensive Development</h4>
-              <p>Green spaces, landscaping, parks, recreational & public amenities.</p>
-            </div>
-          </div>
-          <div class="step-item">
-            <div class="step-content">
-              <h4>Final Inspection and Approval</h4>
-              <p>Quality assurance, regulatory compliance, approval from authorities.</p>
-            </div>
-          </div>
+      <h2>🏗️ DEVELOPMENTAL PATHWAYS</h2>
+      <div class="steps-container">
+        <div class="step">
+          <h4>Site Preparation</h4>
+          <p>Soil testing, foundation work, utility connections (water, electricity, sewage).</p>
+        </div>
+        <div class="step">
+          <h4>Building Construction</h4>
+          <p>Structural framing, roofing, interior finishing (walls, floors, ceilings).</p>
+        </div>
+        <div class="step">
+          <h4>Infrastructure</h4>
+          <p>Roads, utilities, water supply, power distribution throughout the site.</p>
+        </div>
+        <div class="step">
+          <h4>Comprehensive Development</h4>
+          <p>Green spaces, landscaping, parks, recreational & public amenities.</p>
+        </div>
+        <div class="step">
+          <h4>Final Inspection</h4>
+          <p>Quality assurance, regulatory compliance, approval from authorities.</p>
         </div>
       </div>
     </section>
 
-    <!-- MAP -->
+    <!-- MAP frame -->
     <section>
-      <h2>Map</h2>
-      <div class="map-box">
+      <h2>🗺️ SITE MAP</h2>
+      <div class="map-placeholder">
         <div class="map-icon">📍🗺️</div>
-        <p>Werner Road Industrial Park</p>
-        <small>interactive zones: commercial · residential · industrial</small>
-        <div class="map-features">📍 highlighted areas for different types of developments</div>
+        <p>Werner Road Industrial Park – aerial view</p>
+        <small style="color:#aaa;">zones: commercial, residential, industrial highlighted</small>
+        <div style="margin-top:1.5rem; background:#ff8a5c; height:2px; width:80px; margin-left:auto;margin-right:auto;"></div>
+        <p style="margin-top:1.5rem;">📍 Werner Road, Industrial Zone</p>
       </div>
     </section>
 
-    <!-- CONTACT INFORMATION -->
+    <!-- CONTACT frame -->
     <section>
-      <h2>Contact Information</h2>
-      <div class="contact-row">
+      <h2>📞 CONTACT</h2>
+      <div class="contact-grid">
         <div class="contact-item">
           <span class="contact-icon">📞</span>
           <div class="contact-info">
@@ -504,11 +508,20 @@
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- footer inside document -->
-    <div class="footer-note">
-      © 2026 Werner Road Industrial Park – all rights reserved
-    </div>
-  </div>
+  <footer class="app-footer">
+    <p>© 2026 Werner Road Industrial Park · All rights reserved · info@wernerroad.com</p>
+  </footer>
+
+  <script>
+    // Smooth scroll for CTA buttons (optional)
+    document.querySelectorAll('.btn[href="#"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
