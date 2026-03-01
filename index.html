@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReelVault · four page experience</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      background-color: #0e0e10;
+      color: #f0f0f0;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* header & nav */
+    .app-header {
+      background: linear-gradient(145deg, #121214 0%, #1c1c1f 100%);
+      padding: 1.2rem 1rem 0.6rem;
+      border-bottom: 1px solid #2c2c30;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffb347, #ff7e5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo span {
+      font-size: 0.9rem;
+      background: #2a2a2e;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      color: #aaa;
+      margin-left: 0.75rem;
+      font-weight: 400;
+      -webkit-text-fill-color: #aaa;
+    }
+
+    /* page navigation */
+    .page-nav {
+      max-width: 1400px;
+      margin: 0.8rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0 0.2rem;
+    }
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: #a0a0b0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0.6rem 1.5rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+    .nav-btn:hover {
+      background: #2c2c32;
+      color: #f0f0f0;
+      border-color: #ff8a5c;
+    }
+    .nav-btn.active {
+      background: #ff8a5c20;
+      color: #ffb347;
+      border-color: #ff8a5c;
+      box-shadow: 0 0 10px #ff8a5c40;
+    }
+
+    .search-wrapper {
+      flex: 1 1 300px;
+      max-width: 500px;
+    }
+    #search-input {
+      width: 100%;
+      padding: 0.9rem 1.4rem;
+      border: none;
+      background: #26262b;
+      border-radius: 60px;
+      color: white;
+      font-size: 1rem;
+      outline: 2px solid transparent;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    #search-input:focus {
+      outline: 2px solid #ff8a5c;
+      background: #1e1e22;
+    }
+    #search-input::placeholder {
+      color: #7a7a85;
+      font-weight: 300;
+    }
+
+    /* main grid */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.8rem;
+      transition: 0.3s;
+    }
+
+    .movie-card {
+      background: #1d1d20;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.7);
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.35s;
+      cursor: pointer;
+      border: 1px solid #2e2e35;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: cardAppear 0.4s ease forwards;
+    }
+    @keyframes cardAppear {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .movie-card:hover {
+      transform: scale(1.03) translateY(-6px);
+      box-shadow: 0 26px 40px -10px #000000cc;
+      border-color: #ff9f4b;
+    }
+
+    .poster {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      background: #2a2a30;
+    }
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #2a2a30;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+    .poster img:not([data-loaded]) {
+      filter: blur(14px);
+      opacity: 0.7;
+    }
+    .poster img[data-loaded] {
+      filter: blur(0);
+      opacity: 1;
+    }
+
+    .rating-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+      padding: 0.3rem 0.7rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid #ffb347;
+      color: #ffd966;
+      box-shadow: 0 2px 8px black;
+    }
+
+    .card-info {
+      padding: 1rem 0.8rem 1rem;
+      background: #1d1d20;
+    }
+    .card-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #f0f0f2;
+    }
+    .card-info .meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      color: #a8a8b3;
+      font-size: 0.9rem;
+    }
+
+    /* skeleton loader */
+    .skeleton-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+    .skeleton-card {
+      background: #1d1d20;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #2b2b30;
+    }
+    .skeleton-poster {
+      aspect-ratio: 2/3;
+      background: linear-gradient(110deg, #26262c 25%, #32323a 35%, #26262c 45%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite linear;
+    }
+    .skeleton-line {
+      height: 18px;
+      width: 80%;
+      margin: 1rem auto 0.5rem;
+      border-radius: 10px;
+      background: linear-gradient(110deg, #26262c 25%, #32323a 35%, #26262c 45%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite linear;
+    }
+    .skeleton-line.short {
+      width: 55%;
+      margin-bottom: 1rem;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* sentinel & no results */
+    #sentinel {
+      height: 10px;
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #18181c;
+      border-radius: 40px;
+      border: 1px dashed #3c3c44;
+      margin: 2rem 0;
+    }
+    .no-results p {
+      font-size: 1.4rem;
+      color: #7f7f8f;
+    }
+
+    /* footer */
+    .app-footer {
+      text-align: center;
+      padding: 1.8rem;
+      background: #0b0b0d;
+      color: #5f5f6b;
+      border-top: 1px solid #26262b;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .logo { text-align: center; }
+      .page-nav { justify-content: center; }
+      .movies-grid { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>ReelVault </h1>
+      </div>
+      <div class="search-wrapper">
+        <input type="text" id="search-input" placeholder="Search in current page..." autocomplete="off">
+      </div>
+    </div>
+    <!-- page navigation -->
+    <nav class="page-nav">
+      <button class="nav-btn active" data-page="home"> Home</button>
+      <button class="nav-btn" data-page="topRated"> Top Rated</button>
+      <button class="nav-btn" data-page="recent"> Recent</button>
+      <button class="nav-btn" data-page="classics"> Classics</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="movies-grid" id="movies-grid"></div>
+
+    <div id="skeleton-loader" class="skeleton-container" style="display: none;"></div>
+    <div id="no-results" class="no-results" style="display: none;">
+      <p>🎬 No movies match your search</p>
+    </div>
+    <div id="sentinel"></div>
+  </main>
+
+  <footer class="app-footer">
+    <p>✨ infinite scroll · lazy posters · 4-page navigation ✨</p>
+  </footer>
+
+  <script>
+    (function() {
+      // ---------- realistic movie dataset (50 films) ----------
+      const posterBase = [
+        "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", // inception
+        "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", // dark knight
+        "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", // interstellar
+        "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", // matrix
+        "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", // pulp fiction
+        "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg", // fight club
+        "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg", // forrest gump
+        "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg", // shawshank
+        "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", // godfather
+        "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg"  // lotr
+      ];
+
+      const titles = [
+        "The Shawshank Redemption", "The Godfather", "The Dark Knight", "12 Angry Men", "Schindler's List",
+        "Pulp Fiction", "The Lord of the Rings: Return of the King", "Fight Club", "Forrest Gump", "Inception",
+        "The Matrix", "Goodfellas", "Seven Samurai", "Se7en", "The Silence of the Lambs", "It's a Wonderful Life",
+        "Life Is Beautiful", "The Usual Suspects", "Léon: The Professional", "Spirited Away", "Saving Private Ryan",
+        "American History X", "Interstellar", "The Departed", "Whiplash", "The Prestige", "The Lion King",
+        "Gladiator", "The Terminator", "Die Hard", "Back to the Future", "Raiders of the Lost Ark", "Jurassic Park",
+        "Avatar", "Titanic", "The Avengers", "Iron Man", "Guardians of the Galaxy", "Black Panther", "Wonder Woman",
+        "Joker", "The Wolf of Wall Street", "Django Unchained", "The Revenant", "Mad Max: Fury Road", "Parasite",
+        "Coco", "Your Name.", "The Grand Budapest Hotel", "La La Land"
+      ];
+
+      const years = [
+        1994, 1972, 2008, 1957, 1993, 1994, 2003, 1999, 1994, 2010, 1999, 1990, 1954, 1995, 1991, 1946, 1997,
+        1995, 1994, 2001, 1998, 1998, 2014, 2006, 2014, 2006, 1994, 2000, 1984, 1988, 1985, 1981, 1993, 2009,
+        1997, 2012, 2008, 2014, 2018, 2017, 2019, 2013, 2012, 2015, 2015, 2019, 2017, 2016, 2014, 2016
+      ];
+
+      const ratings = [
+        9.3, 9.2, 9.0, 9.0, 8.9, 8.9, 8.9, 8.8, 8.8, 8.8, 8.7, 8.7, 8.6, 8.6, 8.6, 8.6, 8.6, 8.5, 8.5, 8.5,
+        8.5, 8.5, 8.6, 8.5, 8.5, 8.5, 8.5, 8.5, 8.4, 8.4, 8.4, 8.4, 8.4, 8.3, 8.3, 8.3, 8.3, 8.3, 8.3, 8.2,
+        8.2, 8.2, 8.2, 8.1, 8.1, 8.1, 8.1, 8.0, 8.0, 8.0
+      ];
+
+      // build full movie list
+      const allMovies = titles.map((title, index) => ({
+        id: `mov-${index}`,
+        title,
+        year: years[index] || 2000 + index,
+        rating: ratings[index] || 7.5,
+        poster: posterBase[index % posterBase.length],
+      }));
+
+      // ---------- page definitions ----------
+      const pages = {
+        home: { name: 'Home', filter: (movies) => movies },
+        topRated: { name: 'Top Rated', filter: (movies) => movies.filter(m => m.rating >= 8.5) },
+        recent: { name: 'Recent', filter: (movies) => movies.filter(m => m.year >= 2015) },
+        classics: { name: 'Classics', filter: (movies) => movies.filter(m => m.year < 2000) }
+      };
+
+      // ---------- app state ----------
+      let currentPage = 'home';                // page key
+      let pageMovies = pages.home.filter(allMovies);  // unfiltered movies for current page
+      let filteredMovies = [...pageMovies];     // after search filter
+      let visibleCount = 18;                    // initial batch
+      const step = 10;
+      let isLoading = false;
+      let searchTerm = '';
+      let loadTimer = null;
+      let observer = null;
+
+      // DOM elements
+      const grid = document.getElementById('movies-grid');
+      const skeletonLoader = document.getElementById('skeleton-loader');
+      const noResultsDiv = document.getElementById('no-results');
+      const sentinel = document.getElementById('sentinel');
+      const searchInput = document.getElementById('search-input');
+      const navBtns = document.querySelectorAll('.nav-btn');
+
+      // helper to render skeleton cards
+      function renderSkeletons() {
+        let html = '';
+        for (let i = 0; i < 6; i++) {
+          html += `
+            <div class="skeleton-card">
+              <div class="skeleton-poster"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          `;
+        }
+        skeletonLoader.innerHTML = html;
+      }
+      renderSkeletons();
+
+      function showSkeleton(show) {
+        skeletonLoader.style.display = show ? 'grid' : 'none';
+      }
+
+      // render movies from filteredMovies slice 0..visibleCount
+      function renderMovies() {
+        const moviesToRender = filteredMovies.slice(0, visibleCount);
+        if (moviesToRender.length === 0) {
+          grid.innerHTML = '';
+          noResultsDiv.style.display = 'flex';
+          return;
+        }
+        noResultsDiv.style.display = 'none';
+
+        let html = '';
+        moviesToRender.forEach(movie => {
+          html += `
+            <div class="movie-card" data-id="${movie.id}">
+              <div class="poster">
+                <img 
+                  src="${movie.poster}" 
+                  alt="${movie.title} poster"
+                  loading="lazy"
+                  onload="this.setAttribute('data-loaded', 'true')"
+                  onerror="this.onerror=null; this.src='https://via.placeholder.com/300x450/2a2a30/666666?text=+Poster+Unavailable+'; this.setAttribute('data-loaded', 'true')"
+                >
+                <span class="rating-badge">⭐ ${movie.rating}</span>
+              </div>
+              <div class="card-info">
+                <h3 title="${movie.title}">${movie.title}</h3>
+                <div class="meta">
+                  <span>${movie.year}</span>
+                  <span>🎬</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        grid.innerHTML = html;
+      }
+
+      // load more (triggered by sentinel)
+      function loadMore() {
+        if (isLoading) return;
+        if (visibleCount >= filteredMovies.length) return;
+
+        isLoading = true;
+        showSkeleton(true);
+
+        if (loadTimer) clearTimeout(loadTimer);
+        loadTimer = setTimeout(() => {
+          const newCount = Math.min(visibleCount + step, filteredMovies.length);
+          visibleCount = newCount;
+          renderMovies();
+          showSkeleton(false);
+          isLoading = false;
+          loadTimer = null;
+
+          if (visibleCount >= filteredMovies.length && observer) {
+            observer.unobserve(sentinel);
+          } else if (observer && sentinel) {
+            observer.observe(sentinel);
+          }
+        }, 700); // smooth delay
+      }
+
+      // observer for infinite scroll
+      function initObserver() {
+        if (observer) observer.disconnect();
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !isLoading && visibleCount < filteredMovies.length) {
+              loadMore();
+            }
+          });
+        }, { rootMargin: '0px 0px 300px 0px', threshold: 0.1 });
+        if (sentinel) observer.observe(sentinel);
+      }
+
+      // update active nav button
+      function setActiveNav(pageKey) {
+        navBtns.forEach(btn => {
+          if (btn.dataset.page === pageKey) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      }
+
+      // reset everything based on current page and search
+      function resetAndRender() {
+        if (loadTimer) clearTimeout(loadTimer);
+        isLoading = false;
+        showSkeleton(false);
+
+        // compute base movies for current page
+        pageMovies = pages[currentPage].filter(allMovies);
+
+        // apply search filter
+        const term = searchTerm.trim().toLowerCase();
+        filteredMovies = term === '' 
+          ? [...pageMovies] 
+          : pageMovies.filter(m => m.title.toLowerCase().includes(term));
+
+        visibleCount = Math.min(18, filteredMovies.length);
+        renderMovies();
+
+        // reconnect observer
+        if (observer) {
+          observer.unobserve(sentinel);
+          if (visibleCount < filteredMovies.length) {
+            observer.observe(sentinel);
+          }
+        }
+
+        if (filteredMovies.length === 0) {
+          noResultsDiv.style.display = 'flex';
+        } else {
+          noResultsDiv.style.display = 'none';
+        }
+      }
+
+      // handle page change
+      function switchPage(pageKey) {
+        if (pageKey === currentPage) return;
+        currentPage = pageKey;
+        setActiveNav(pageKey);
+
+        // clear search input and term
+        searchInput.value = '';
+        searchTerm = '';
+
+        resetAndRender();
+      }
+
+      // nav click listeners
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const page = e.target.dataset.page;
+          if (page) switchPage(page);
+        });
+      });
+
+      // debounced search
+      let searchTimeout;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          searchTerm = e.target.value;
+          resetAndRender();
+        }, 300);
+      });
+
+      // initial setup
+      setActiveNav('home');
+      resetAndRender();
+      initObserver();
+
+      // ensure observer re-checks after render (in case all loaded)
+      const originalRender = renderMovies;
+      renderMovies = function() {
+        originalRender();
+        if (visibleCount >= filteredMovies.length && observer && sentinel) {
+          observer.unobserve(sentinel);
+        }
+      };
+      renderMovies(); // rebind and call once
+
+      // (optional) re-init observer on window resize (no extra logic needed)
+    })();
+  </script>
+</body>
+</html>
