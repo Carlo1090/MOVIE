@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Werner Road Industrial Park</title>
+  <title>Werner Road · industrial park</title>
   <style>
     * {
       margin: 0;
@@ -21,16 +21,12 @@
       flex-direction: column;
     }
 
-    /* header */
+    /* header (simplified, no sticky for hero to breathe) */
     .app-header {
       background: linear-gradient(145deg, #121214 0%, #1c1c1f 100%);
-      padding: 1.8rem 1rem;
+      padding: 1.2rem 1rem;
       border-bottom: 1px solid #2c2c30;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(4px);
     }
 
     .header-content {
@@ -44,7 +40,7 @@
     }
 
     .logo h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 700;
       background: linear-gradient(135deg, #ffb347, #ff7e5f);
       -webkit-background-clip: text;
@@ -62,7 +58,88 @@
       -webkit-text-fill-color: #aaa;
     }
 
-    /* main container */
+    /* ----- LANDING / HERO SECTION (full width) ----- */
+    .hero {
+      background: linear-gradient(135deg, #0b0b0e 0%, #1e1e24 100%);
+      padding: 5rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #ff8a5c;
+      box-shadow: inset 0 -10px 30px rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #ffd8b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      border-bottom: none;
+      display: block;
+      padding-bottom: 0;
+    }
+
+    .hero .hero-sub {
+      font-size: 1.8rem;
+      color: #ffb347;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: #c0c0cc;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: transparent;
+      border: 2px solid #ff8a5c;
+      color: #ffb347;
+      padding: 0.9rem 2.5rem;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #ff8a5c;
+      color: #0e0e10;
+      border-color: #ff8a5c;
+      box-shadow: 0 0 20px #ff8a5c;
+    }
+
+    .btn-outline {
+      border-color: #aaa;
+      color: #ddd;
+    }
+
+    .btn-outline:hover {
+      background: #aaa;
+      color: #0e0e10;
+      border-color: #aaa;
+      box-shadow: 0 0 15px #aaa;
+    }
+
+    /* main container for detail sections */
     .container {
       max-width: 1200px;
       margin: 2.5rem auto;
@@ -71,9 +148,9 @@
       width: 100%;
     }
 
-    /* section styling */
+    /* section styling (each frame) */
     section {
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
       opacity: 0;
       transform: translateY(20px);
       animation: sectionFadeIn 0.6s ease forwards;
@@ -83,11 +160,11 @@
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #ff8a5c;
+      margin-bottom: 1.8rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px solid #ff8a5c;
       display: inline-block;
       color: #fff;
     }
@@ -121,13 +198,6 @@
       color: #d0d0da;
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
-    }
-    .info-card .highlight {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
-      display: block;
-      margin-top: 0.5rem;
     }
 
     .stats-grid {
@@ -165,7 +235,7 @@
       margin-top: 0.25rem;
     }
 
-    /* developmental pathway / steps */
+    /* developmental pathway steps */
     .steps-container {
       display: flex;
       flex-wrap: wrap;
@@ -227,19 +297,14 @@
     .map-placeholder:hover {
       background: #23232a;
     }
-    .map-placeholder .map-icon {
+    .map-icon {
       font-size: 4rem;
       margin-bottom: 1rem;
-      filter: drop-shadow(0 4px 6px #000);
     }
     .map-placeholder p {
       font-size: 1.4rem;
       color: #ffb347;
       font-weight: 500;
-    }
-    .map-placeholder small {
-      color: #888;
-      font-size: 1rem;
     }
 
     /* contact cards */
@@ -253,7 +318,7 @@
     .contact-item {
       background: #1d1d20;
       border-radius: 40px;
-      padding: 1.8rem 3rem;
+      padding: 1.5rem 2.5rem;
       display: flex;
       align-items: center;
       gap: 1.5rem;
@@ -269,7 +334,7 @@
       font-size: 2.2rem;
     }
     .contact-info h4 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #aaa;
     }
     .contact-info a {
@@ -282,7 +347,6 @@
       text-decoration: underline;
     }
 
-    /* footer */
     .app-footer {
       text-align: center;
       padding: 2rem;
@@ -292,24 +356,20 @@
       font-size: 0.95rem;
     }
 
-    /* responsive */
     @media (max-width: 600px) {
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      h2 { font-size: 1.8rem; }
-      .step { min-width: 100%; }
+      .hero h2 { font-size: 2.8rem; }
+      .hero .hero-sub { font-size: 1.4rem; }
+      .hero p { font-size: 1.2rem; }
+      .btn { font-size: 1.1rem; padding: 0.7rem 1.8rem; }
       .contact-item { flex-direction: column; text-align: center; }
     }
 
-    /* fade in delays for sections */
-    section:nth-child(1) { animation-delay: 0.1s; }
-    section:nth-child(2) { animation-delay: 0.2s; }
-    section:nth-child(3) { animation-delay: 0.3s; }
-    section:nth-child(4) { animation-delay: 0.4s; }
-    section:nth-child(5) { animation-delay: 0.5s; }
-    section:nth-child(6) { animation-delay: 0.6s; }
+    /* section fade delays */
+    section:nth-of-type(1) { animation-delay: 0.2s; }
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.4s; }
+    section:nth-of-type(4) { animation-delay: 0.5s; }
+    section:nth-of-type(5) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
@@ -318,58 +378,71 @@
       <div class="logo">
         <h1>WERNER ROAD <span class="sub">industrial park</span></h1>
       </div>
-      <div style="color:#aaa; font-size:1rem;">📍 strategic · scalable · prime</div>
+      <div style="color:#aaa;">📞 (123) 456-7890</div>
     </div>
   </header>
 
+  <!-- LANDING / HERO SECTION (at the very top) -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Where industry meets opportunity</h2>
+      <div class="hero-sub">Werner Road Industrial Park</div>
+      <p>100 acres of premium mixed‑use land. Strategic location, scalable infrastructure, and ready for your investment.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn">📊 View overview</a>
+        <a href="#" class="btn btn-outline">📞 Contact sales</a>
+      </div>
+    </div>
+  </section>
+
   <main class="container">
-    <!-- WHY INVEST? -->
+    <!-- WHY INVEST? frame -->
     <section>
       <h2>⭐ WHY INVEST?</h2>
       <div class="card-grid">
         <div class="info-card">
           <h3>High‑Quality Land</h3>
-          <p>Our industrial park sits on premium land with excellent infrastructure and direct highway access.</p>
+          <p>Premium terrain with excellent infrastructure and direct highway access.</p>
         </div>
         <div class="info-card">
           <h3>Strategic Location</h3>
-          <p>Positioned near key economic zones, offering easy connectivity to local markets and transport hubs.</p>
+          <p>Near key economic zones, easy connectivity to local markets and transport.</p>
         </div>
         <div class="info-card">
           <h3>Scalable Development</h3>
-          <p>Designed for future expansion with flexible lots, ensuring long‑term viability and growth.</p>
+          <p>Flexible lots designed for future expansion and long‑term growth.</p>
         </div>
       </div>
     </section>
 
-    <!-- PROPERTY OVERVIEW -->
+    <!-- PROPERTY OVERVIEW frame -->
     <section>
       <h2>📊 PROPERTY OVERVIEW</h2>
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-value">100 acres</div>
           <div class="stat-label">Total Land Area</div>
-          <div class="stat-desc">Mixed‑use: residential, commercial, industrial</div>
+          <div class="stat-desc">mixed‑use: residential, commercial, industrial</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">80%</div>
           <div class="stat-label">Commercial occupancy</div>
-          <div class="stat-desc">Offices, retail, parking</div>
+          <div class="stat-desc">offices, retail, parking</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">20%</div>
           <div class="stat-label">Residential occupancy</div>
-          <div class="stat-desc">Apartments, townhouses, amenities</div>
+          <div class="stat-desc">apartments, townhouses, amenities</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">10%</div>
           <div class="stat-label">Industrial occupancy</div>
-          <div class="stat-desc">Manufacturing, warehousing, R&D</div>
+          <div class="stat-desc">manufacturing, warehousing, R&D</div>
         </div>
       </div>
     </section>
 
-    <!-- DEVELOPMENTAL PATHWAYS (steps) -->
+    <!-- DEVELOPMENTAL PATHWAYS frame -->
     <section>
       <h2>🏗️ DEVELOPMENTAL PATHWAYS</h2>
       <div class="steps-container">
@@ -391,24 +464,24 @@
         </div>
         <div class="step">
           <h4>Final Inspection</h4>
-          <p>Quality assurance, regulatory compliance, approval from local authorities.</p>
+          <p>Quality assurance, regulatory compliance, approval from authorities.</p>
         </div>
       </div>
     </section>
 
-    <!-- MAP (placeholder) -->
+    <!-- MAP frame -->
     <section>
       <h2>🗺️ SITE MAP</h2>
       <div class="map-placeholder">
         <div class="map-icon">📍🗺️</div>
-        <p>Werner Road Industrial Park</p>
-        <small>Interactive map – zones for commercial, residential, industrial highlighted</small>
-        <div style="margin-top:1.5rem; background:#2c2c34; height:2px; width:80px; margin-left:auto;margin-right:auto;"></div>
-        <p style="margin-top:1.5rem; font-size:1rem; color:#aaa;">📍 Werner Road, Industrial Zone (aerial view placeholder)</p>
+        <p>Werner Road Industrial Park – aerial view</p>
+        <small style="color:#aaa;">zones: commercial, residential, industrial highlighted</small>
+        <div style="margin-top:1.5rem; background:#ff8a5c; height:2px; width:80px; margin-left:auto;margin-right:auto;"></div>
+        <p style="margin-top:1.5rem;">📍 Werner Road, Industrial Zone</p>
       </div>
     </section>
 
-    <!-- CONTACT INFORMATION -->
+    <!-- CONTACT frame -->
     <section>
       <h2>📞 CONTACT</h2>
       <div class="contact-grid">
@@ -441,13 +514,14 @@
     <p>© 2026 Werner Road Industrial Park · All rights reserved · info@wernerroad.com</p>
   </footer>
 
-  <!-- minimal JS for any future interactivity (optional) -->
   <script>
-    (function() {
-      // Smooth fade-in already handled by CSS. 
-      // Could add lazy loading for images if any, but none present.
-      console.log('Werner Road Industrial Park page loaded');
-    })();
+    // Smooth scroll for CTA buttons (optional)
+    document.querySelectorAll('.btn[href="#"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>
